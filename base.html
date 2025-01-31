@@ -7,18 +7,93 @@
     <style>
         /* General Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Times New Roman', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #6e8efb, #4a6cf7);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
-            color: #333;
+            position: relative;
         }
 
+        /* Moving Stars Background */
+        @keyframes moveStars {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        .stars {
+            position: fixed; /* Changed to fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .stars::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            animation: moveStars 10s linear infinite;
+        }
+
+        .stars::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            animation: moveStars 15s linear infinite;
+        }
+
+        /* Light/Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .theme-toggle img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header */
         h1 {
             color: #fff;
             font-size: 3rem;
@@ -26,6 +101,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Search Container */
         .search-container {
             width: 100%;
             max-width: 800px;
@@ -36,6 +112,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            margin-top: 20px;
         }
 
         #search-box {
@@ -48,6 +125,7 @@
             background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            font-family: 'Times New Roman', serif;
         }
 
         #search-box:focus {
@@ -68,6 +146,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+            font-family: 'Times New Roman', serif;
         }
 
         #search-button::after {
@@ -95,6 +174,7 @@
             opacity: 0;
         }
 
+        /* Search Results */
         #search-results {
             width: 100%;
             max-width: 800px;
@@ -110,6 +190,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            color: #333;
         }
 
         .result-item:hover {
@@ -120,19 +201,111 @@
         .result-item h3 {
             margin-top: 0;
             color: #4a6cf7;
+            font-family: 'Times New Roman', serif;
         }
 
         .result-item p {
             color: #555;
+            font-family: 'Times New Roman', serif;
         }
 
         .result-item a {
             color: #4a6cf7;
             text-decoration: none;
+            font-family: 'Times New Roman', serif;
         }
 
         .result-item a:hover {
             text-decoration: underline;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 40px; /* Added margin for spacing */
+        }
+
+        .pagination button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #4a6cf7;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination button:hover {
+            background-color: #4a6cf7;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Times New Roman', serif;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #4a6cf7;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .social-buttons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-buttons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            background-color: #4a6cf7;
+        }
+
+        .social-buttons img {
+            width: 24px;
+            height: 24px;
         }
 
         /* Animations */
@@ -150,15 +323,81 @@
         .result-item {
             animation: fadeIn 0.5s ease-in-out;
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #121212, #000);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .search-container,
+        body.dark-mode .result-item {
+            background: rgba(0, 0, 0, 0.5);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .result-item h3,
+        body.dark-mode .result-item a {
+            color: #6e8efb;
+        }
+
+        body.dark-mode .result-item p {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode #search-box,
+        body.dark-mode #search-button,
+        body.dark-mode .pagination button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode #search-button:hover,
+        body.dark-mode .pagination button:hover {
+            background-color: #6e8efb;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+    <!-- Moving Stars Background -->
+    <div class="stars"></div>
+
+    <!-- Light/Dark Mode Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <img id="theme-icon" src="https://img.icons8.com/ios-filled/50/ffffff/sun--v1.png" alt="Sun">
+    </div>
+
+    <!-- Header -->
     <h1>Dee's Queries</h1>
+
+    <!-- Search Container -->
     <div class="search-container">
         <input type="text" id="search-box" placeholder="Search the web...">
         <button id="search-button" onclick="performSearch()">Search</button>
     </div>
+
+    <!-- Search Results -->
     <div id="search-results"></div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prev-page" onclick="prevPage()" disabled>Previous</button>
+        <button id="next-page" onclick="nextPage()" disabled>Next</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Dipman Majumdar</p>
+        <div class="social-buttons">
+            <a href="https://instagram.com/dipmanmajumdar" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram">
+            </a>
+            <a href="https://github.com/dipmanmajumdar" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
+            </a>
+        </div>
+    </footer>
 
     <script>
         // Replace with your Google Custom Search Engine ID
@@ -166,6 +405,11 @@
         // Replace with your Google API Key
         const apiKey = 'AIzaSyAoNhFA5ieH2onmlKShV4X6EFkQWQwqnSk';
 
+        let currentPage = 1;
+        let resultsPerPage = 5;
+        let allResults = [];
+
+        // Perform Search
         function performSearch() {
             const query = document.getElementById('search-box').value;
             if (query) {
@@ -173,19 +417,28 @@
 
                 fetch(url)
                     .then(response => response.json())
-                    .then(data => displayResults(data.items))
+                    .then(data => {
+                        allResults = data.items || [];
+                        currentPage = 1;
+                        displayResults();
+                    })
                     .catch(error => console.error('Error fetching search results:', error));
             } else {
                 alert('Please enter a search query.');
             }
         }
 
-        function displayResults(results) {
+        // Display Results
+        function displayResults() {
             const resultsContainer = document.getElementById('search-results');
             resultsContainer.innerHTML = '';
 
-            if (results && results.length > 0) {
-                results.forEach(result => {
+            const start = (currentPage - 1) * resultsPerPage;
+            const end = start + resultsPerPage;
+            const pageResults = allResults.slice(start, end);
+
+            if (pageResults.length > 0) {
+                pageResults.forEach(result => {
                     const resultElement = document.createElement('div');
                     resultElement.classList.add('result-item');
                     resultElement.innerHTML = `
@@ -197,6 +450,38 @@
                 });
             } else {
                 resultsContainer.innerHTML = '<p>No results found.</p>';
+            }
+
+            // Update Pagination Buttons
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = end >= allResults.length;
+        }
+
+        // Pagination Functions
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayResults();
+            }
+        }
+
+        function nextPage() {
+            if ((currentPage * resultsPerPage) < allResults.length) {
+                currentPage++;
+                displayResults();
+            }
+        }
+
+        // Light/Dark Mode Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/moon-symbol.png';
+            } else {
+                themeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/sun--v1.png';
             }
         }
     </script>
