@@ -27,7 +27,7 @@
 ```
 See the Code in the base.html
 
-You Can See the Previous Design & Code of the Website here: [Click Here!](https://codefile.io/f/CAjSWVjx6B)
+You Can See the Previous Design & Code of the Website here: https://codefile.io/f/CAjSWVjx6B
 ```
 
 ---

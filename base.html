@@ -17,6 +17,7 @@
             align-items: center;
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         /* Moving Stars Background */
@@ -30,7 +31,7 @@
         }
 
         .stars {
-            position: fixed; /* Changed to fixed */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -40,28 +41,14 @@
             z-index: -1;
         }
 
-        .stars::before {
-            content: '';
+        .star {
             position: absolute;
-            top: -100%;
-            left: 0;
             width: 2px;
             height: 2px;
             background: #fff;
+            border-radius: 50%;
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-            animation: moveStars 10s linear infinite;
-        }
-
-        .stars::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 50%;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-            animation: moveStars 15s linear infinite;
+            animation: moveStars linear infinite;
         }
 
         /* Light/Dark Mode Toggle */
@@ -361,7 +348,7 @@
 </head>
 <body>
     <!-- Moving Stars Background -->
-    <div class="stars"></div>
+    <div class="stars" id="stars-container"></div>
 
     <!-- Light/Dark Mode Toggle -->
     <div class="theme-toggle" onclick="toggleTheme()">
@@ -369,7 +356,7 @@
     </div>
 
     <!-- Header -->
-    <h1>Dee's Queries</h1>
+    <h1> <a href="###" style="color: White; text-decoration:none">Dee's Queries</a></h1>
 
     <!-- Search Container -->
     <div class="search-container">
@@ -391,10 +378,10 @@
         <p>© Dipman Majumdar</p>
         <div class="social-buttons">
             <a href="https://instagram.com/dipmanmajumdar" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             </a>
             <a href="https://github.com/dipmanmajumdar" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
             </a>
         </div>
     </footer>
@@ -484,6 +471,24 @@
                 themeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/sun--v1.png';
             }
         }
+
+        // Create Moving Stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const numStars = 100; // Number of stars
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random speed
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize Stars
+        createStars();
     </script>
 </body>
 </html>
