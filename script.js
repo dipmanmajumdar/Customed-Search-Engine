@@ -1,7 +1,7 @@
         // Replace with your Google Custom Search Engine ID
-        const cx = '870ee2965b5264600';
+        const cx = '';
         // Replace with your Google API Key
-        const apiKey = 'AIzaSyAoNhFA5ieH2onmlKShV4X6EFkQWQwqnSk';
+        const apiKey = '';
 
         let currentPage = 1;
         let resultsPerPage = 5;
